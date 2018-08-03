@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
+
+import ArrowIcon from './arrowIcon';
 
 const TextStyle = styled('span')`
     color: #880B0D;
@@ -14,7 +17,7 @@ const ButtonElement = styled('div')`
 export default class Button extends Component {
     constructor(props) {
         super(props);
-
+    
     }
     render() {
         const ButtonDiv = styled('div')`
@@ -27,8 +30,12 @@ export default class Button extends Component {
             align-items: center;
             height: ${this.props.height};
             width: ${this.props.width};
-            margin-bottom: 5px;         
+            margin-bottom: 5px;
         ` 
+        
+        if(this.props.hidden){
+            return null;
+        }
 
         return (
             <ButtonDiv>
@@ -36,9 +43,17 @@ export default class Button extends Component {
                     <TextStyle>{this.props.buttonText}</TextStyle>
                 </ButtonElement>
                 <ButtonElement>
-                    <TextStyle>----></TextStyle>
+                    <ArrowIcon
+                        height="100px"
+                        width="100px"
+                    />
                 </ButtonElement>
             </ButtonDiv>
         );
     }
+}
+
+Button.propTypes = {
+    width: PropTypes.string.isRequired,
+    height: PropTypes.string.isRequired    
 }

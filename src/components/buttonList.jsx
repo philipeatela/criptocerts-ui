@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import Button from './button';
 
 export default class ButtonList extends Component {
@@ -24,4 +26,10 @@ export default class ButtonList extends Component {
             </ListDiv>
         );
     }
+}
+
+Button.propTypes = {
+    width: PropTypes.string.isRequired,
+    height: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired, 
 }

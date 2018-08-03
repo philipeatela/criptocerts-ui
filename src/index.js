@@ -6,8 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 import Button from './components/button';
 import ButtonList from './components/buttonList';
 
-const buttonWidth = "80%";
-const buttonHeight = "100%";
+const buttonWidth = "70%";
+const buttonHeight = "15%";
 
 ReactDOM.render(
     <App>
@@ -16,22 +16,23 @@ ReactDOM.render(
             height="100%"
             >
                 <Button
-                buttonText="Cadastrar emissor"
+                buttonText="Create Issuer"
+                height={buttonHeight}
+                width={buttonWidth}
+                hidden={true}
+                />
+                <Button
+                buttonText="New Certificate"
                 height={buttonHeight}
                 width={buttonWidth}
                 />
                 <Button
-                buttonText="Criar novo certificado"
+                buttonText="Issue Certificate"
                 height={buttonHeight}
                 width={buttonWidth}
                 />
                 <Button
-                buttonText="Emitir certificado"
-                height={buttonHeight}
-                width={buttonWidth}
-                />
-                <Button
-                buttonText="Sobre"
+                buttonText="About"
                 height={buttonHeight}
                 width={buttonWidth}
                 />
