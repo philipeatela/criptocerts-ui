@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom'; 
 
 import ArrowIcon from './arrowIcon';
 
@@ -14,11 +15,17 @@ const ButtonElement = styled('div')`
     
 `
 
-export default class Button extends Component {
+class Button extends Component {
     constructor(props) {
         super(props);
-    
+        
+        this.handleClick = this.handleClick.bind(this);
     }
+
+    handleClick() {
+        this.props.history.push("/newissuer");
+    }
+
     render() {
         const ButtonDiv = styled('div')`
             background-color: #FBDCDC;
@@ -38,7 +45,9 @@ export default class Button extends Component {
         }
 
         return (
-            <ButtonDiv>
+            <ButtonDiv
+                onClick = {this.handleClick}
+            >
                 <ButtonElement>
                     <TextStyle>{this.props.buttonText}</TextStyle>
                 </ButtonElement>
@@ -57,3 +66,5 @@ Button.propTypes = {
     width: PropTypes.string.isRequired,
     height: PropTypes.string.isRequired    
 }
+
+export default withRouter(Button);

@@ -1,42 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import Button from './components/button';
-import ButtonList from './components/buttonList';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 
-const buttonWidth = "70%";
-const buttonHeight = "15%";
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+
+import App from './components/App';
+import reducers from './reducers';
+import FormContainer from './components/formContainer';
+
+const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
-    <App>
-        <ButtonList
-            width="100%"
-            height="100%"
-            >
-                <Button
-                buttonText="Create Issuer"
-                height={buttonHeight}
-                width={buttonWidth}
-                hidden={true}
-                />
-                <Button
-                buttonText="New Certificate"
-                height={buttonHeight}
-                width={buttonWidth}
-                />
-                <Button
-                buttonText="Issue Certificate"
-                height={buttonHeight}
-                width={buttonWidth}
-                />
-                <Button
-                buttonText="About"
-                height={buttonHeight}
-                width={buttonWidth}
-                />
-        </ButtonList>
-    </App>,
-     document.getElementById('root'));
+    <Provider store={createStoreWithMiddleware(reducers)}>
+      <BrowserRouter>
+        <Switch>
+            <Route path="/" exact={true} component={App} />
+            <Route path="/newissuer" component={FormContainer} />            
+        </Switch>
+      </BrowserRouter>    
+    </Provider>    
+    , document.getElementById('root'));
 registerServiceWorker();

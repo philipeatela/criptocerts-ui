@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
 
 const AppDiv = styled('div')`
   display: flex;
@@ -31,7 +30,7 @@ const AppTitle = styled('h1')`
   font-size: 32px;
 `
 
-export default class App extends Component {
+export default class AppContainer extends Component {
   render() {
     return (
       <AppDiv>

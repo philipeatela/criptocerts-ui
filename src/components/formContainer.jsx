@@ -23,6 +23,6 @@ export default class FormContainer extends Component {
     }
 }
 
-ArrowIcon.propTypes = {
+FormContainer.propTypes = {
   
 }

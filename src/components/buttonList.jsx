@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'react-emotion';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 
 import Button from './button';
 
-export default class ButtonList extends Component {
+class ButtonList extends Component {
     constructor(props) {
         super(props);
 
@@ -20,6 +21,11 @@ export default class ButtonList extends Component {
             height: ${this.props.height};
             width: ${this.props.width}; 
         `
+
+        if(!this.props.visibility){
+            return null;
+        }
+
         return (
             <ListDiv>
                 {this.props.children}
@@ -33,3 +39,11 @@ Button.propTypes = {
     height: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired, 
 }
+
+function mapStateToProps(state) {
+    return {
+        visibility: state.visibility
+    };
+}
+
+export default connect(mapStateToProps)(ButtonList);
