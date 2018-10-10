@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
 import logo from '../logo.svg';
+import { Container, Row, Col } from 'reactstrap';
 
-const AppDiv = styled('div')`
+const PageContainer = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height:100vh;
+  height: 100vh;
 `
-const AppHeader = styled('header')`
+const HeaderRow = styled('div')`
   background-color: #880B0D;
   width: 100%;
   padding: 20px;
   color: white;
   text-align: center;
 `
-const BodyDiv = styled('div')`
+const BodyRow = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background-color: #D5C6C6;  
-  width:100%;
-  height:100%;
   padding-top: 5px;
+  width: 100%;
+  height: 100%;
 `
 const AppTitle = styled('h1')`
   font-size: 32px;
@@ -33,16 +34,16 @@ const AppTitle = styled('h1')`
 export default class AppContainer extends Component {
   render() {
     return (
-      <AppDiv>
-        <AppHeader>
+      <PageContainer>
+        <HeaderRow>
           <AppTitle>
-            Welcome to Criptocerts!
+            Bem Vindo ao Criptocerts!
           </AppTitle>
-        </AppHeader>
-        <BodyDiv>
+        </HeaderRow>
+        <BodyRow>
           {this.props.children}
-        </BodyDiv>
-      </AppDiv>
+        </BodyRow>
+      </PageContainer>
     );
   }
 }
