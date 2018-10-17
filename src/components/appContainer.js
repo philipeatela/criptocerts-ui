@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'react-emotion';
 import logo from '../logo.svg';
 import { Container, Row, Col } from 'reactstrap';
+import { TitleText } from '../themes/themes';
 
 const PageContainer = styled('div')`
   display: flex;
@@ -11,10 +12,9 @@ const PageContainer = styled('div')`
   height: 100vh;
 `
 const HeaderRow = styled('div')`
-  background-color: #880B0D;
+  background-color: #40532f;
   width: 100%;
   padding: 20px;
-  color: white;
   text-align: center;
 `
 const BodyRow = styled('div')`
@@ -22,13 +22,10 @@ const BodyRow = styled('div')`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #D5C6C6;  
+  background-color: #a4a38e;  
   padding-top: 5px;
   width: 100%;
   height: 100%;
-`
-const AppTitle = styled('h1')`
-  font-size: 32px;
 `
 
 export default class AppContainer extends Component {
@@ -36,9 +33,9 @@ export default class AppContainer extends Component {
     return (
       <PageContainer>
         <HeaderRow>
-          <AppTitle>
+          <TitleText>
             Bem Vindo ao Criptocerts!
-          </AppTitle>
+          </TitleText>
         </HeaderRow>
         <BodyRow>
           {this.props.children}
