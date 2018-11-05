@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'react-emotion';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 
 import AppContainer from './components/appContainer';
 import { Button as BootstrapButton } from 'reactstrap';
-import { LabelText, LargeButton } from './themes/themes';
+import { LabelText, LargeButton } from './themes';
 
 const DefaultButton = styled(BootstrapButton)`
   ${LargeButton}
@@ -21,7 +19,7 @@ export default class App extends Component {
                 <LabelText>Criar Emissor</LabelText>
               </DefaultButton>
             </Link>
-            <Link to="/newissuer">
+            <Link to="/newcertificate">
               <DefaultButton>
                 <LabelText>Criar Certificação</LabelText>
               </DefaultButton>

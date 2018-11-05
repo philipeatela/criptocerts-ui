@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
-import logo from '../logo.svg';
-import { Container, Row, Col } from 'reactstrap';
-import { TitleText } from '../themes/themes';
+// import logo from '../logo.svg';
+import { TitleText } from '../themes';
 
 const PageContainer = styled('div')`
   display: flex;

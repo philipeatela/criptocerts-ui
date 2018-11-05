@@ -23,42 +23,43 @@ const StyledButton = styled(Button)`
   ${SmallButton}
 `;
 
-export default class NewIssuerScreen extends Component {
+export default class NewCertificateScreen extends Component {
   render() {
       return (
         <AppContainer>
           <StyledForm>
             <FormGroupItem>
               <StyledLabel>
-                {`Endereço ETH: `}
+                {'Emissor: '}
               </StyledLabel>
-              <InputItem //@TODO Disable this input. Eth address is fixed
+              <InputItem //@TODO Disable this input. Issuer name is fixed
                 type="text"
-                placeholder="XXXXXXXXXXX"
+                placeholder="Instituição Emissora"
               />
             </FormGroupItem>
             <FormGroupItem>
               <StyledLabel>
-                {`Nome: `}
+                {'Nome: '}
               </StyledLabel>
               <InputItem
                 type="text"
-                placeholder="Nome do emissor"
-              />
-            </FormGroupItem>
-            <FormGroupItem>
-              <StyledLabel>
-                {`E-mail: `}
-              </StyledLabel>
-              <InputItem
-                type="email"
-                placeholder="E-mail de contato"
+                placeholder="Nome do certificado"
               />
             </FormGroupItem>
             <FormGroupItem>
               <DescriptionContainer>
                 <StyledLabel>
-                  {`Descrição: `}
+                  {'Descrição: '}
+                </StyledLabel>
+                <DescriptionInput
+                  type="textarea"
+                />
+              </DescriptionContainer>
+            </FormGroupItem>
+            <FormGroupItem>
+              <DescriptionContainer>
+                <StyledLabel>
+                  {'Critérios: '}
                 </StyledLabel>
                 <DescriptionInput
                   type="textarea"
