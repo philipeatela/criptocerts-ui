@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css } from 'react-emotion';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
 import AppContainer from '../components/appContainer';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
@@ -30,6 +31,11 @@ const DescriptionContainer = styled('div')`
   align-items: flex-start;
 `
 
+const DescriptionInput = styled(InputItem)`
+  height: 150px;
+  width: 300px;
+`;
+
 const ButtonsContainer = styled('div')`
   display: flex;
   flex-direction: row;
@@ -44,10 +50,6 @@ const StyledForm = styled(Form)`
   border: 2.5px solid #21271b;
   border-radius: 5px;
 `
-
-// const StlyedForm = css`
-//   border: 1px solid black;
-// `
 
 export default class NewIssuerScreen extends Component {
   render() {
@@ -86,7 +88,7 @@ export default class NewIssuerScreen extends Component {
                 <StyledLabel>
                   {`Descrição: `}
                 </StyledLabel>
-                <InputItem
+                <DescriptionInput
                   type="textarea"
                 />
               </DescriptionContainer>
@@ -95,9 +97,11 @@ export default class NewIssuerScreen extends Component {
               <StyledButton>
                 Cadastrar
               </StyledButton>
-              <StyledButton>
-                Cancelar
-              </StyledButton>
+              <Link to="/">
+                <StyledButton>
+                  Cancelar
+                </StyledButton>
+              </Link>
             </ButtonsContainer> 
           </StyledForm>
         </AppContainer>
