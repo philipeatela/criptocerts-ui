@@ -14,22 +14,22 @@ export default class App extends Component {
   render() {
       return (
         <AppContainer>
-            <Link to="/newissuer">
+            <Link to="/new-issuer">
               <DefaultButton>
                 <LabelText>Criar Emissor</LabelText>
               </DefaultButton>
             </Link>
-            <Link to="/newcertificate">
+            <Link to="/new-certificate">
               <DefaultButton>
                 <LabelText>Criar Certificação</LabelText>
               </DefaultButton>
             </Link>
-            <Link to="/newissuer">
+            <Link to="/issue-certificate">
               <DefaultButton>
                 <LabelText>Emitir Certificado</LabelText>
               </DefaultButton>
             </Link>
-            <Link to="/newissuer">
+            <Link to="/new-issuer">
               <DefaultButton>
                 <LabelText>Sobre</LabelText>
               </DefaultButton>
