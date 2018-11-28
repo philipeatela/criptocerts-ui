@@ -14,6 +14,8 @@ import {
   FormGroupItem,
   InputItem
 } from '../themes';
+import web3 from '../web3';
+import criptocerts from '../criptocerts';
 
 const StyledLabel = styled(Label)`
   ${LabelTextCss}
@@ -24,19 +26,26 @@ const StyledButton = styled(Button)`
 `;
 
 export default class NewIssuerScreen extends Component {
+  state = {
+    name: '',
+    email: '',
+    description: ''
+  }
+
+  registerIssuer = async () => {
+    const { name, email, description } = this.state;
+
+    const accounts = await web3.eth.getAccounts();
+
+    await criptocerts.methods.addIssuer(name, email, description).send({
+      from: accounts[0],
+    });
+  }
+
   render() {
       return (
         <AppContainer>
           <StyledForm>
-            <FormGroupItem>
-              <StyledLabel>
-                {`Endereço ETH: `}
-              </StyledLabel>
-              <InputItem //@TODO Disable this input. Eth address is fixed
-                type="text"
-                placeholder="XXXXXXXXXXX"
-              />
-            </FormGroupItem>
             <FormGroupItem>
               <StyledLabel>
                 {`Nome: `}
@@ -44,6 +53,7 @@ export default class NewIssuerScreen extends Component {
               <InputItem
                 type="text"
                 placeholder="Nome do emissor"
+                onChange={event => this.setState({ name: event.target.value })}
               />
             </FormGroupItem>
             <FormGroupItem>
@@ -53,6 +63,7 @@ export default class NewIssuerScreen extends Component {
               <InputItem
                 type="email"
                 placeholder="E-mail de contato"
+                onChange={event => this.setState({ email: event.target.value })}
               />
             </FormGroupItem>
             <FormGroupItem>
@@ -62,11 +73,14 @@ export default class NewIssuerScreen extends Component {
                 </StyledLabel>
                 <DescriptionInput
                   type="textarea"
+                  onChange={event => this.setState({ description: event.target.value })}
                 />
               </DescriptionContainer>
             </FormGroupItem>
             <ButtonsContainer>
-              <StyledButton>
+              <StyledButton
+                onClick={this.registerIssuer}
+              >
                 Cadastrar
               </StyledButton>
               <Link to="/">

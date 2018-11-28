@@ -19,9 +19,19 @@ export default class App extends Component {
                 <LabelText>Criar Emissor</LabelText>
               </DefaultButton>
             </Link>
+            <Link to="/view-issuers">
+              <DefaultButton>
+                <LabelText>Visualizar Emissores</LabelText>
+              </DefaultButton>
+            </Link>
             <Link to="/new-certificate">
               <DefaultButton>
                 <LabelText>Criar Certificação</LabelText>
+              </DefaultButton>
+            </Link>
+            <Link to="/view-certificates">
+              <DefaultButton>
+                <LabelText>Visualizar Certificados</LabelText>
               </DefaultButton>
             </Link>
             <Link to="/issue-certificate">

@@ -60,6 +60,7 @@ export const FormGroupItem = styled(FormGroup)`
 
 export const InputItem = styled(Input)`
   margin-left: 5px;
+  padding: 3px;
 `;
 
 export const DescriptionInput = styled(InputItem)`

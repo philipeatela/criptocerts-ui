@@ -7,8 +7,6 @@ import { Button, Label } from 'reactstrap';
 import {
   LabelTextCss,
   SmallButton,
-  DescriptionContainer,
-  DescriptionInput,
   ButtonsContainer,
   StyledForm,
   FormGroupItem,
