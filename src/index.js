@@ -9,6 +9,7 @@ import NewCertificateScreen from './containers/NewCertificateScreen';
 import IssueCertificateScreen from './containers/IssueCertificateScreen';
 import ViewIssuersScreen from './containers/ViewIssuersScreen';
 import MyCertificatesScreen from './containers/MyCertificatesScreen';
+import VerifyCertificateScreen from './containers/VerifyCertificateScreen';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -18,6 +19,7 @@ ReactDOM.render(
           <Route path="/new-certificate" component={NewCertificateScreen} />
           <Route path="/view-certificates" component={MyCertificatesScreen} />
           <Route path="/issue-certificate" component={IssueCertificateScreen} />
+          <Route path="/verify-certificate" component={VerifyCertificateScreen} />
           <Route path="/" exact={true} component={App} />
       </Switch>
     </BrowserRouter>    

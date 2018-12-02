@@ -18,11 +18,11 @@ import web3 from '../web3';
 import criptocerts from '../criptocerts';
 
 const StyledLabel = styled(Label)`
-  ${LabelTextCss}
+  ${LabelTextCss};
 `;
 
 const StyledButton = styled(Button)`
-  ${SmallButton}
+  ${SmallButton};
 `;
 
 export default class NewCertificateScreen extends Component {
@@ -30,12 +30,14 @@ export default class NewCertificateScreen extends Component {
     name: '',
     description: '',
     criteria: '',
-  }
+  };
 
   registerCertificate = async () => {
     const { name, description, criteria } = this.state;
 
     const accounts = await web3.eth.getAccounts();
+
+    // check if registered issuer before adding cert
 
     await criptocerts.methods.addCertificate(name, description, criteria).send({
       from: accounts[0],
