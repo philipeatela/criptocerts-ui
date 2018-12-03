@@ -33,33 +33,29 @@ export default class App extends Component {
       const { accountFound } = this.state;
       return (
         <AppContainer>
-            <Message>{accountFound ? 'Selecione a opção desejada' : 'Entre em sua conta Ethereum através do Metamask para começar a usar o sistema!'}</Message>
+            <Message>{accountFound ? 'Selecione a opção desejada' : 'Entre em sua conta Ethereum através do Metamask para criar e emitir certificados!'}</Message>
             <Link to="/new-issuer">
-              <DefaultButton>
-                <LabelText>Criar Emissor</LabelText>
+              <DefaultButton disabled={!accountFound}>
+                <LabelText>Registrar-se Como Emissor</LabelText>
               </DefaultButton>
             </Link>
             <Link to="/view-issuers">
               <DefaultButton>
-                <LabelText>Visualizar Emissores</LabelText>
+                <LabelText>Visualizar Emissores Cadastrados</LabelText>
               </DefaultButton>
             </Link>
             <Link to="/new-certificate">
-              <DefaultButton>
+              <DefaultButton disabled={!accountFound}>
                 <LabelText>Criar Certificação</LabelText>
               </DefaultButton>
             </Link>
-            {
-              accountFound && (
-              <Link to="/view-certificates">
-                <DefaultButton>
-                  <LabelText>Visualizar Meus Certificados</LabelText>
-                </DefaultButton>
-              </Link>
-              )
-            }
+            <Link to="/view-certificates">
+              <DefaultButton disabled={!accountFound}>
+                <LabelText>Visualizar Meus Certificados</LabelText>
+              </DefaultButton>
+            </Link>
             <Link to="/issue-certificate">
-              <DefaultButton>
+              <DefaultButton disabled={!accountFound}>
                 <LabelText>Emitir Certificado</LabelText>
               </DefaultButton>
             </Link>

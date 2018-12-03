@@ -8,12 +8,13 @@ const PageContainer = styled('div')`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  height: 110vh;
+  overflow: auto;
 `
 const HeaderRow = styled('div')`
   background-color: #40532f;
   width: 100%;
-  padding: 20px;
+  padding: 20px 0px;
   text-align: center;
 `
 const BodyRow = styled('div')`

@@ -64,6 +64,6 @@ export const InputItem = styled(Input)`
 `;
 
 export const DescriptionInput = styled(InputItem)`
-  height: 150px;
+  height: 125px;
   width: 300px;
 `;

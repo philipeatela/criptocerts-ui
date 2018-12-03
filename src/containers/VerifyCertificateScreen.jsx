@@ -16,8 +16,8 @@ import {
 } from '../themes';
 import criptocerts from '../criptocerts';
 import fetchIssuedCerts from '../services/fetchIssuedCerts';
-import fetchCertificates from '../services/fetchCertificates';
 import web3 from '../web3';
+import fetchCertificateById from '../services/fetchCertificateById';
 
 const StyledLabel = styled(Label)`
   ${LabelTextCss}
@@ -39,38 +39,29 @@ export default class VerifyCertificateScreen extends Component {
     verificationResult: '',
   }
 
-  async componentDidMount() {
-    const issuedCerts = await fetchIssuedCerts();
-    const certs = await fetchCertificates();
-    const cert = certs[0];
-    const issuedCert = issuedCerts[0];
-    console.log(cert);
-  }
-
   onVerify = async () => {
     this.setState({
       message: 'Aguarde enquanto o certificado inserido é validado...'
     });
 
-    const { certData, verifyAttempted } = this.state;
+    const { certData } = this.state;
     const issuedCerts = await fetchIssuedCerts();
-    const accounts = await web3.eth.getAccounts();
 
-    const certs = await fetchCertificates();
-    const cert = certs[0];
-    // const data = {
-    //   name: cert.name,
-    //   description: cert.description,
-    //   criteria: cert.criteria,
-    // }
+    if (!issuedCerts) {
+      this.setState({
+        message: 'Não foram encontrados certificados emitidos!'
+      });
+      return;
+    }
+    const certObj = JSON.parse(certData);
 
-    const stringfied = JSON.stringify(cert);
-
-    const stringToValidate = `\x19Ethereum Signed Message:\n${stringfied.length}${stringfied}`;
+    const stringToValidate = `\x19Ethereum Signed Message:\n${certData.length}${certData}`;
     const insertedDataHash = web3.utils.sha3(stringToValidate);
 
-    const issuedCert = issuedCerts[0];
+    const issuedCert = issuedCerts[certObj.issuingId];
     const ds = issuedCert.digitalSignature;
+    const certId = issuedCert.certId;
+    const certInfo = await fetchCertificateById(certId);
 
     const signature = ds.substr(2); //remove 0x
     const r = '0x' + signature.slice(0, 64);
@@ -79,9 +70,7 @@ export default class VerifyCertificateScreen extends Component {
     const v_decimal = web3.utils.hexToNumber(v);
 
     const signingAddr = await criptocerts.methods.recoverAddr(insertedDataHash, v_decimal, r, s).call();
-    const sucess = await criptocerts.methods.isSigned(accounts[0], insertedDataHash, v_decimal, r, s).call();
-    console.log(signingAddr);
-    console.log(sucess);
+    const sucess = await criptocerts.methods.isSigned(certInfo.owner, insertedDataHash, v_decimal, r, s).call();
 
     const responseMsg = sucess
       ? `O certificado inserido é válido e foi emitido pelo endereço ${signingAddr}.`
@@ -92,14 +81,6 @@ export default class VerifyCertificateScreen extends Component {
       verificationResult: responseMsg,
       verifyAttempted: true,
     });
-
-    //FOR SIGNATURE Hex:
-    // I really did make this message
-
-    //FOR VALIDATOR sha3:
-    // \x19Ethereum Signed Message:\n30I really did make this message
-
-
   };
 
   _renderBeforeVerify() {

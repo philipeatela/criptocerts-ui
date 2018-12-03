@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
-import fs from 'fs';
 
 import AppContainer from '../components/appContainer';
 import { Button, Label } from 'reactstrap';
@@ -117,14 +116,20 @@ export default class IssueCertificateScreen extends Component {
       return;
     }
 
+    const totalIssuedCertificates = await criptocerts.methods.getIssuedCertsCount().call();
+    const issuingId = totalIssuedCertificates;
+
     const issuingData = {
       certificateName: selectedCertificate.name,
       certificateDescription: selectedCertificate.description,
       certificateCriteria: selectedCertificate.criteria,
       receivingAddress: receivingAddress,
       receivingName: receivingName,
-      issuingAddress: selectedCertificate.issuingInstitutionAddress,
+      issuingAddress: addr,
+      issuingId: issuingId,
     }
+
+    console.log(issuingData);
 
     const stringfiedData = JSON.stringify(issuingData);
     const signature = await web3.eth.personal.sign('0x' + toHex(stringfiedData), addr, "33jseyts");
@@ -151,7 +156,9 @@ export default class IssueCertificateScreen extends Component {
       issuingInstitution,
       finishedIssuing,
       receivingName,
-      issuedCertificate
+      issuedCertificate,
+      selectedCertificateId,
+      receivingAddress
     } = this.state;
     const certificateOptions = availableCertificates
       ? availableCertificates.map(cert => <option key={cert.id}>{`${cert.id} - ${cert.name}`}</option>)
@@ -181,7 +188,7 @@ export default class IssueCertificateScreen extends Component {
                 <InputItem
                   type="select"
                   onChange={event => this.setState({
-                    selectedCertificateId: event.target.value
+                    selectedCertificateId: parseInt(event.target.value.charAt(0))
                   })}
                 >
                   {certificateOptions}

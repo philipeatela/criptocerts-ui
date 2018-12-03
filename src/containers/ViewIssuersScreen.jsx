@@ -22,17 +22,6 @@ export default class ViewIssuersScreen extends Component {
   }
 
   async componentDidMount() {
-    // const numberOfIssuers = await criptocerts.methods.getIssuerCount().call();
-
-    // const issuers = [];
-    // let issuer;
-
-    // for(let i = 0; i < numberOfIssuers;i++) {
-    //   let id = i + 1;
-    //   issuer = await criptocerts.methods.getIssuer(id).call();
-    //   issuers.push(issuer);
-    // }
-
     const issuers = await fetchIssuers();
 
     console.log(issuers);
