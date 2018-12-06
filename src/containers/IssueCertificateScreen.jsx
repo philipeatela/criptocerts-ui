@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'react-emotion';
 import { Link } from 'react-router-dom'
+import Modal from 'react-modal';
 
 import AppContainer from '../components/appContainer';
 import { Button, Label } from 'reactstrap';
@@ -20,6 +21,28 @@ import criptocerts from '../criptocerts';
 import toHex from '../utils/toHex';
 import fetchIssuers from '../services/fetchIssuers';
 
+const customStyles = {
+  content : {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#a4a38e',
+    width: '30%',
+    height: '25%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  }
+};
+
+const StyledInput = styled(InputItem)`
+  margin-bottom: 5%;
+`;
+
 const StyledLabel = styled(Label)`
   ${LabelTextCss}
 `;
@@ -31,6 +54,8 @@ const StyledButton = styled(Button)`
 const Message = styled('h4')`
   
 `;
+
+Modal.setAppElement(document.getElementById('root'));
 
 export default class IssueCertificateScreen extends Component {
   state = {
@@ -44,6 +69,20 @@ export default class IssueCertificateScreen extends Component {
     issuers: [],
     finishedIssuing: false,
     issuedCertificate: '',
+    showModal: false,
+    password: '',
+  }
+
+  openModal = () => {
+    this.setState({ showModal: true });
+  }
+
+  afterOpenModal = () => {
+
+  }
+
+  closeModal = () => {
+    this.setState({ showModal: false });
   }
 
   async componentDidMount() {
@@ -103,7 +142,10 @@ export default class IssueCertificateScreen extends Component {
       certificates,
       receivingName,
       message,
+      password,
     } = this.state;
+
+    this.closeModal();
 
     const accounts = await web3.eth.getAccounts();
     const addr = accounts[0];
@@ -129,10 +171,8 @@ export default class IssueCertificateScreen extends Component {
       issuingId: issuingId,
     }
 
-    console.log(issuingData);
-
     const stringfiedData = JSON.stringify(issuingData);
-    const signature = await web3.eth.personal.sign('0x' + toHex(stringfiedData), addr, "33jseyts");
+    const signature = await web3.eth.personal.sign('0x' + toHex(stringfiedData), addr, password);
 
     this.setState({
       message: 'Aguarde enquanto a transação é processada...'
@@ -148,6 +188,34 @@ export default class IssueCertificateScreen extends Component {
       message: 'Certificado emitido com sucesso!'
     });
   };
+
+  _renderModal = () => {
+    const { showModal } = this.state;
+
+    return (
+      <Modal
+        isOpen={showModal}
+        // onAfterOpen={this.afterOpenModal}
+        onRequestClose={this.closeModal}
+        contentLabel="Confirmação"
+        style={customStyles}
+      >
+        <h4>Favor preencher sua senha para desbloquear a conta!</h4>
+        <StyledInput
+          type="password"
+          placeholder="Senha"
+          onChange={event => this.setState({
+            password: event.target.value
+          })}
+        />
+        <StyledButton
+          onClick={this.onIssue}
+        >
+          Confirmar
+        </StyledButton>
+      </Modal>
+    );
+  }
 
   render() {
     const {
@@ -220,7 +288,7 @@ export default class IssueCertificateScreen extends Component {
               </FormGroupItem>
               <ButtonsContainer>
                 <StyledButton
-                  onClick={this.onIssue}
+                  onClick={this.openModal}
                 >
                   Certificar!
               </StyledButton>
@@ -256,6 +324,7 @@ export default class IssueCertificateScreen extends Component {
             </Fragment>
           )}
         </StyledForm>
+        {this._renderModal()}
       </AppContainer>
     );
   }

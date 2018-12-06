@@ -10,7 +10,6 @@ import {
   ButtonsContainer,
   StyledForm,
   FormGroupItem,
-  InputItem,
   DescriptionContainer,
   DescriptionInput,
 } from '../themes';
@@ -39,7 +38,7 @@ export default class VerifyCertificateScreen extends Component {
     verificationResult: '',
   }
 
-  onVerify = async () => {
+  onConfirmVerify = async () => {
     this.setState({
       message: 'Aguarde enquanto o certificado inserido é validado...'
     });
@@ -53,22 +52,27 @@ export default class VerifyCertificateScreen extends Component {
       });
       return;
     }
+
     const certObj = JSON.parse(certData);
 
+    // Calculate JSON document's hash
     const stringToValidate = `\x19Ethereum Signed Message:\n${certData.length}${certData}`;
     const insertedDataHash = web3.utils.sha3(stringToValidate);
 
+    // Get certificate information, owner and digital signature from the blockchain
     const issuedCert = issuedCerts[certObj.issuingId];
     const ds = issuedCert.digitalSignature;
     const certId = issuedCert.certId;
     const certInfo = await fetchCertificateById(certId);
 
-    const signature = ds.substr(2); //remove 0x
+    // Calculate cryptographic parameters from the digital signature
+    const signature = ds.substr(2); //remover 0x
     const r = '0x' + signature.slice(0, 64);
     const s = '0x' + signature.slice(64, 128);
     const v = '0x' + signature.slice(128, 130);
     const v_decimal = web3.utils.hexToNumber(v);
 
+    // Call verification functions
     const signingAddr = await criptocerts.methods.recoverAddr(insertedDataHash, v_decimal, r, s).call();
     const sucess = await criptocerts.methods.isSigned(certInfo.owner, insertedDataHash, v_decimal, r, s).call();
 
