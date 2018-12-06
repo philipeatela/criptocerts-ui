@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
-// import logo from '../logo.svg';
-import { TitleText } from '../themes';
+import { TitleText, colors } from '../themes';
 
 const PageContainer = styled('div')`
   display: flex;
@@ -12,7 +11,7 @@ const PageContainer = styled('div')`
   overflow: auto;
 `
 const HeaderRow = styled('div')`
-  background-color: #40532f;
+  background-color: ${colors.green};
   width: 100%;
   padding: 20px 0px;
   text-align: center;
@@ -22,7 +21,7 @@ const BodyRow = styled('div')`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #a4a38e;  
+  background-color: ${colors.brown};  
   padding-top: 5px;
   width: 100%;
   height: 100%;

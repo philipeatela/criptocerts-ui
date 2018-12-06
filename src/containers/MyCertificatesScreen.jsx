@@ -3,7 +3,6 @@ import styled from 'react-emotion';
 
 import AppContainer from '../components/appContainer';
 import ListRow from '../components/listRow';
-import criptocerts from '../criptocerts';
 import web3 from '../web3';
 import fetchCertificates from '../services/fetchCertificates';
 

@@ -1,6 +1,11 @@
 import styled, { css } from 'react-emotion';
 import { Form, FormGroup, Input } from 'reactstrap';
 
+export const colors = {
+  green: '#40532f',
+  brown: '#a4a38e',
+}
+
 // Text
 export const TitleText = styled('span')`
   color: white;

@@ -3,7 +3,6 @@ import styled from 'react-emotion';
 
 import AppContainer from '../components/appContainer';
 import ListRow from '../components/listRow';
-import criptocerts from '../criptocerts';
 import fetchIssuers from '../services/fetchIssuers';
 
 const Title = styled('h2')`
@@ -23,8 +22,6 @@ export default class ViewIssuersScreen extends Component {
 
   async componentDidMount() {
     const issuers = await fetchIssuers();
-
-    console.log(issuers);
 
     if (issuers.length) {
       this.setState({

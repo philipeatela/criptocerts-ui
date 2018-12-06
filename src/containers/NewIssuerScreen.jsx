@@ -16,7 +16,6 @@ import {
 } from '../themes';
 import web3 from '../web3';
 import criptocerts from '../criptocerts';
-import checkIssuerById from '../services/checkIssuerById';
 
 const StyledLabel = styled(Label)`
   ${LabelTextCss}

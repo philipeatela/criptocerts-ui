@@ -14,6 +14,7 @@ import {
   InputItem,
   DescriptionContainer,
   DescriptionInput,
+  colors,
 } from '../themes';
 import fetchCertificates from '../services/fetchCertificates';
 import web3 from '../web3';
@@ -29,7 +30,7 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: '#a4a38e',
+    backgroundColor: colors.brown,
     width: '30%',
     height: '25%',
     display: 'flex',
@@ -75,10 +76,6 @@ export default class IssueCertificateScreen extends Component {
 
   openModal = () => {
     this.setState({ showModal: true });
-  }
-
-  afterOpenModal = () => {
-
   }
 
   closeModal = () => {
@@ -135,13 +132,10 @@ export default class IssueCertificateScreen extends Component {
 
   onIssue = async () => {
     const {
-      issuingInstitution,
       selectedCertificateId,
       receivingAddress,
-      issuers,
       certificates,
       receivingName,
-      message,
       password,
     } = this.state;
 
@@ -195,7 +189,6 @@ export default class IssueCertificateScreen extends Component {
     return (
       <Modal
         isOpen={showModal}
-        // onAfterOpen={this.afterOpenModal}
         onRequestClose={this.closeModal}
         contentLabel="Confirmação"
         style={customStyles}
@@ -223,10 +216,7 @@ export default class IssueCertificateScreen extends Component {
       message,
       issuingInstitution,
       finishedIssuing,
-      receivingName,
       issuedCertificate,
-      selectedCertificateId,
-      receivingAddress
     } = this.state;
     const certificateOptions = availableCertificates
       ? availableCertificates.map(cert => <option key={cert.id}>{`${cert.id} - ${cert.name}`}</option>)
