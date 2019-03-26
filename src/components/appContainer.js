@@ -1,48 +1,45 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
-import logo from '../logo.svg';
+import { TitleText, colors } from '../themes';
 
-const AppDiv = styled('div')`
+const PageContainer = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height:100vh;
+  height: 110vh;
+  overflow: auto;
 `
-const AppHeader = styled('header')`
-  background-color: #880B0D;
+const HeaderRow = styled('div')`
+  background-color: ${colors.green};
   width: 100%;
-  padding: 20px;
-  color: white;
+  padding: 20px 0px;
   text-align: center;
 `
-const BodyDiv = styled('div')`
+const BodyRow = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #D5C6C6;  
-  width:100%;
-  height:100%;
+  background-color: ${colors.brown};  
   padding-top: 5px;
-`
-const AppTitle = styled('h1')`
-  font-size: 32px;
+  width: 100%;
+  height: 100%;
 `
 
 export default class AppContainer extends Component {
   render() {
     return (
-      <AppDiv>
-        <AppHeader>
-          <AppTitle>
-            Welcome to Criptocerts!
-          </AppTitle>
-        </AppHeader>
-        <BodyDiv>
+      <PageContainer>
+        <HeaderRow>
+          <TitleText>
+            Bem Vindo ao Criptocerts!
+          </TitleText>
+        </HeaderRow>
+        <BodyRow>
           {this.props.children}
-        </BodyDiv>
-      </AppDiv>
+        </BodyRow>
+      </PageContainer>
     );
   }
 }
